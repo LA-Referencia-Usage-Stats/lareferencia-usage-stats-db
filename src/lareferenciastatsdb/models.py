@@ -1,8 +1,13 @@
-from flask_appbuilder import Model
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm import declarative_base
 from sqlalchemy import DateTime
 from datetime import datetime
+
+try:
+    from flask_appbuilder import Model
+except ImportError:
+    Model = declarative_base()
 
 SOURCE_TYPE_REPOSITORY = 'R' 
 SOURCE_TYPE_NATIONAL   = 'N'
