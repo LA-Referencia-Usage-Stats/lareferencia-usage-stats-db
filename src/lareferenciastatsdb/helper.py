@@ -50,6 +50,14 @@ class UsageStatsDatabaseHelper:
     Update the data from the database
     """
     def update_data_from_db(self):
+        # Rebuild in-memory caches from scratch to avoid stale/duplicated entries
+        # when refresh is executed more than once.
+        self.sources_by_id = {}
+        self.sources_by_site_id = {}
+        self.sources_by_identifer_prefix = {}
+        self.national_sources_by_country_iso = {}
+        self.repository_sources_by_country_iso = {}
+        self.country_by_identifier_prefix = {}
 
         # iterate over the sources and store the data in the dicts
         with Session(self.engine) as session:
@@ -145,7 +153,7 @@ class UsageStatsDatabaseHelper:
         index_names = []
 
         if identifier is None or identifier == "":
-            raise Exception(status_code=400, detail="Identifier parameter is required")
+            raise ValueError("Identifier parameter is required")
         
         normalized_oai_prefix = extract_oai_identifier_prefix(identifier)
         #print(normalized_oai_prefix)
