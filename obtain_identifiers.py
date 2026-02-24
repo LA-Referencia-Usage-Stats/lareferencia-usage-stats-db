@@ -1,12 +1,12 @@
 from lareferenciastatsdb.models import Source
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, MetaData, Table, select
-from config import read_ini
+from config import read_ini, get_usage_stats_db_uri, get_matomo_db_uri
 
 
 config = read_ini("config.ini")
-database_connection_str = config["DB"]["SQLALCHEMY_DATABASE_URI"] 
-matomo_connection_str = config["MATOMO"]["SQLALCHEMY_DATABASE_URI"]
+database_connection_str = get_usage_stats_db_uri(config)
+matomo_connection_str = get_matomo_db_uri(config)
 
 engine = create_engine(database_connection_str)
 connection = engine.connect()

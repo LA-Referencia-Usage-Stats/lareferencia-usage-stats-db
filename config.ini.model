@@ -1,7 +1,19 @@
-[DB]
-SQLALCHEMY_DATABASE_URI = sqlite:///../lareferencia-usage-stats-admin/app.db
+[USAGE_STATS_DB]
+HOST = usage-db
+PORT = 3306
+USERNAME = stats
+PASSWORD = stats
+DATABASE = lareferencia_usage_stats
 
+[MATOMO_DB]
+HOST = matomo-db
+PORT = 3306
+USERNAME = matomo
+PASSWORD = matomo
+DATABASE = matomo
 
+[USAGE_STATS_INDEX]
+INDEX_PREFIX = usage-stats
 
 
 

@@ -18,7 +18,7 @@ logger = logging.getLogger()
 import requests
 import json
 
-from config import read_ini
+from config import read_ini, get_usage_stats_db_uri
 
 DESCRIPTION = """
 Usage Statistics Manager Database loading tool.
@@ -46,7 +46,7 @@ def main():
 
     #config
     config = read_ini(args.config_file_path);
-    database_connection_str = config["DB"]["SQLALCHEMY_DATABASE_URI"] 
+    database_connection_str = get_usage_stats_db_uri(config)
 
 
     # database
@@ -106,6 +106,5 @@ def parse_args():
 
 if __name__ == "__main__":
     main()
-
 
 
